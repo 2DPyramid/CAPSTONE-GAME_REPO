@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://dqb30k5xixbh0"]
+
+[ext_resource type="Script" uid="uid://w3x5sitc2ap1" path="res://character_body_3d.gd" id="1_glv2v"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uu6xs"]
+sky_top_color = Color(0.43602806, 0.66701376, 0.8942643, 1)
+sky_horizon_color = Color(0.831694, 0.88169044, 0.9295031, 1)
+ground_horizon_color = Color(0.831694, 0.88169044, 0.9295031, 1)
+
+[sub_resource type="Sky" id="Sky_r0du0"]
+sky_material = SubResource("ProceduralSkyMaterial_uu6xs")
+
+[sub_resource type="Environment" id="Environment_cm0pq"]
+background_mode = 2
+sky = SubResource("Sky_r0du0")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rxg2q"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_glv2v"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r0du0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_glv2v"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_uu6xs"]
+material = SubResource("StandardMaterial3D_glv2v")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_glv2v"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_r0du0"]
+
+[node name="Node3D" type="Node3D" unique_id=1455243263]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2059417355]
+environment = SubResource("Environment_cm0pq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1991739979]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_color = Color(0.91764706, 0.78431374, 0.3764706, 1)
+shadow_enabled = true
+
+[node name="RigidBody3D" type="StaticBody3D" parent="." unique_id=1194841533]
+physics_material_override = SubResource("PhysicsMaterial_rxg2q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=387750436]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25872803, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_glv2v")
+debug_color = Color(0, 0.56078434, 0.88235295, 1)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=676536397]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7088721, 0)
+script = ExtResource("1_glv2v")
+
+[node name="Sprite3D" type="Sprite3D" parent="CharacterBody3D" unique_id=1616152636]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1326120735]
+shape = SubResource("CapsuleShape3D_r0du0")
+debug_color = Color(0, 0.59371203, 0.73299384, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=969160124]
+mesh = SubResource("SphereMesh_uu6xs")
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=1880258501]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5694852, -0.2150352)
+
+[node name="Sprite3D" type="StaticBody3D" parent="." unique_id=98656020]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.44042754, 0, -5.823427)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sprite3D" unique_id=284591594]
+shape = SubResource("BoxShape3D_glv2v")
+debug_color = Color(0.81691414, 0.39934844, 0.18784067, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Sprite3D" unique_id=1437011508]
+mesh = SubResource("BoxMesh_r0du0")
