@@ -5,6 +5,9 @@ const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
 
+const CURSOR_POINT = preload("uid://bvphk5xynovaa")
+const CURSOR_GRAB = preload("uid://djuorie6p48hv")
+
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
@@ -24,5 +27,19 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-
+	
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		var throwythingm = $Camera3D/RayCast3D.get_collider()
+		if throwythingm:
+			Input.set_custom_mouse_cursor(CURSOR_GRAB, Input.CURSOR_BUSY)
+			throwythingm.apply_impulse(Vector3(0., 10., -10.))
+			
+			
 	move_and_slide()
+	
+	
+	
+	
+	
+	
+	
